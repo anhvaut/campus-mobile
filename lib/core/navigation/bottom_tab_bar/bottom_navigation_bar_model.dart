@@ -1,4 +1,5 @@
 import 'package:campus_mobile_experimental/core/constants/app_constants.dart';
+import 'package:campus_mobile_experimental/core/navigation/push_notification_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:campus_mobile_experimental/core/services/bottom_navigation_bar_service.dart';
@@ -37,34 +38,36 @@ class _BottomTabBarState extends State<BottomTabBar> {
         ),
       ),
       body: currentTab[provider.currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: provider.currentIndex,
-        onTap: (index) {
-          provider.currentIndex = index;
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            title: new Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.map),
-            title: new Text('Map'),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.notifications),
-            title: new Text('Notifications'),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.person),
-            title: new Text('User Profile'),
-          ),
-        ],
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: IconTheme.of(context).color,
-        unselectedItemColor: Colors.grey.shade500,
+      bottomNavigationBar: PushNotificationWrapper(
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: provider.currentIndex,
+          onTap: (index) {
+            provider.currentIndex = index;
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.home),
+              title: new Text('Home'),
+            ),
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.map),
+              title: new Text('Map'),
+            ),
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.notifications),
+              title: new Text('Notifications'),
+            ),
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.person),
+              title: new Text('User Profile'),
+            ),
+          ],
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: IconTheme.of(context).color,
+          unselectedItemColor: Colors.grey.shade500,
+        ),
       ),
     );
   }
