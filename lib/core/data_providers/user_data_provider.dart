@@ -184,12 +184,19 @@ class UserDataProvider extends ChangeNotifier {
       if (await silentLogin()) {
         await getUserProfile();
         returnVal = true;
+        if (userProfileModel.classifications.student) {
+          subscribeToUserTopics();
+        }
       }
       _isLoading = false;
       notifyListeners();
     }
     print('logged in');
     return returnVal;
+  }
+
+  void subscribeToUserTopics() {
+    _pushNotificationDataProvider.subscribeToTopics(['student']);
   }
 
   void toggleCard(String card) {

@@ -36,6 +36,7 @@ class PushNotificationDataProvider extends ChangeNotifier {
       _fcm.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
         print("Settings registered: $settings");
       });
+      subscribeToTopics(['all', 'freefood', 'emergency']);
     }
   }
 
@@ -165,6 +166,14 @@ class PushNotificationDataProvider extends ChangeNotifier {
     for (String topic in topics) {
       if ((topic ?? "").isNotEmpty) {
         _fcm.subscribeToTopic(topic);
+      }
+    }
+  }
+
+  unsubscribeToTopics(List<String> topics) {
+    for (String topic in topics) {
+      if ((topic ?? "").isNotEmpty) {
+        _fcm.unsubscribeFromTopic(topic);
       }
     }
   }
